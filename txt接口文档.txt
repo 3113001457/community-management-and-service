@@ -1,0 +1,28 @@
+(0：失败；1：成功；)
+
+登录接口：http://localhost:8000/denglu/denglu
+passname:账号,
+password:密码
+返回：num:0；（用户名或密码有误）num:1;（登陆成功）
+
+注册接口：http://localhost:8000/zhuce/zhuce
+passname:账号,
+password:密码，
+zt:状态，（Boss:0;物业:1;业主:2;成员3）必须是字符串
+zc:注册码（6位随机数）必须是字符串
+xiaoqu:那个小区（0：Boss;1：小区一；2：小区二、、、、）；必须是字符串
+返回：num:0;num:1;（）
+
+
+判断是否有此账户：http://localhost:8000/chaxun/chaxun
+返回：num:0；（已注册）num:1;（可注册）
+
+
+列表页：
+id、用户账号、发表内容、发表时间、点赞+、点赞-
+评论页：
+id	listid	用户id	text	时间
+
+图片上传：http://localhost:8000/imgsc/imgsc	post
+返回值：上传后的图片命名；
+
