@@ -33,14 +33,17 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/chaxun', function(req, res) {
+router.get('/listp', function(req, res) {
+    var listid=req.query["listid"];
     var passname=req.query["passname"];
-    var sql = 'select * from login where passname=?';
-    getUserByName(sql,[passname],function (a,b) {
-        if(b==""){
-            res.send({"num":"1"});
-        }else{
-            res.send({"num":"0"});
+    var txt=req.query["txt"];
+    var img=req.query["img"];
+    var sql = 'insert into listp (img,listid,passname,txt) values (?,?,?,?)';
+    getUserByName(sql,[img,listid,passname,txt],function (a,b) {
+        if(b!=""){
+            res.send({num:'1'});
+        }else if(b==""){
+            res.send({num:'0'});
         }
     });
 });

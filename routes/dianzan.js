@@ -33,14 +33,16 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/chaxun', function(req, res) {
+router.get('/listf', function(req, res) {
     var passname=req.query["passname"];
-    var sql = 'select * from login where passname=?';
-    getUserByName(sql,[passname],function (a,b) {
-        if(b==""){
-            res.send({"num":"1"});
-        }else{
-            res.send({"num":"0"});
+    var txt=req.query["txt"];
+    var img=req.query["img"];
+    var sql = "update list set dianzan=?,dz=? where uid = ?";
+    getUserByName(sql,[passname,txt,img],function (a,b) {
+        if(b!=""){
+            res.send({num:'1'});
+        }else if(b==""){
+            res.send({num:'0'});
         }
     });
 });

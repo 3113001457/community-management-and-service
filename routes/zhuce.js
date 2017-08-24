@@ -43,6 +43,8 @@ router.get('/zhuce', function(req, res) {
     getUserByName(passname,password,zt,zc,xiaoqu,function (a,b) {
         if(b!=""){
             res.send({num:'1'});
+        }else if(b==""){
+            res.send({num:'0'});
         }
     });
 });

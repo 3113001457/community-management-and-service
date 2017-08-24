@@ -3,53 +3,216 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<style type="text/css">
-		*{
-			margin: 0;
-			padding: 0;
-		}
-		#pickfiles{
-			width: 70px;
-			height: 23px;
-		}
-	</style>
+	<style type="text/css"></style>
 </head>
 <body>
-<button id="btn">发送</button>
-<input type="file" id="pickfiles" name="importFile" onchange="setFiles(this)" value="select files" />
-<!-- <input type="button" id="uploadfiles" value="注册" /><br> -->
+
+<button id="btn">账号登录btn</button><br />
+<button id="btn1">账号注册btn1</button><br />
+<button id="btn2">账号查询btn2</button><br />
+<button id="btn3">获取评论的全部数据btn3</button><br />
+<button id="btn10">获取评论发表的评论的全部数据btn10</button><br />
+<button id="btn4">发表评论btn4</button><br />
+<button id="btn5">删除评论btn5</button><br />
+<button id="btn6">评论发表的评论btn6</button><br />
+<button id="btn7">删除评论发表的评论btn7</button><br />
+<button id="btn8">点赞btn8</button><br />
+<button id="btn9">btn9</button><br />
+<input type="file" id="pickfiles" name="importFile" onchange="setFiles(this)" value="图片上传" /><br />
+<!-- <input type="button" id="uploadfiles" value="注册" /> -->
     <script src="javascripts/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript">
 		var str='http://192.168.43.153:8000';
-		
+        //账号登录
         btn.onclick=function(){
-        	$.ajax({
-	            type:'get',
-	            url:str+'/zhuce/zhuce',
-	            data:{
-	                passname:'6',
-	                password:'6',
-	                zt:'2',
-	                zc:'888888',
-	                xiaoqu:'4'
-	            },success :function(da){
-	            	console.log(da)
-	            	if(da.num=="1"){
-	            		alert("注册成功！");
-	            	}else if(da.num=="0"){
-	            		alert("注册失败！");
-	            	}
-	            }
-	        })
+            $.ajax({
+                type:'get',
+                url:str+'/denglu/denglu',
+                data:{
+                    passname:3,
+                    password:3
+                },
+                success :function(da){
+                    if(da.num=="0"){
+                        alert("登录失败！");
+                    }else if(da.num!=""){
+                        alert("登录成功！");
+                        console.log(da)
+                    }
+                }
+            })
         }
-   /* var files;
-    var fil = '';
-
-    var setFiles=function(element){
-//  	fil = element.files[0].name
-//  	console.log(element.files[0])
-////$('#img').html('<img src="'+$('#pickfiles').val()+'">')
-//		console.log(element.value)  //获取到选取的图片
+        //账号注册
+        btn1.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/zhuce/zhuce',
+                data:{
+                    passname:32123,
+                    password:32123,
+                    zt:3,
+                    zc:000002,
+                    xiaoqu:4
+                },
+                success :function(da){
+                    if(da.num=="1"){
+                        alert("注册成功！");
+                    }else if(da.num=="0"){
+                        alert("注册失败！");
+                    }
+                }
+            })
+        }
+        //账号查询
+        btn2.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/chaxun/chaxun',
+                data:{
+                    passname:3333
+                },
+                success :function(da){
+                    if(da.num=="1"){
+                        alert("可注册！");
+                    }else if(da.num=="0"){
+                        alert("已注册！");
+                    }
+                }
+            })
+        }
+        //获取评论的全部数据
+        btn3.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/list/list',
+                success :function(da){
+                    console.log(da)
+                }
+            })
+        }
+        //获取评论发表的评论
+        btn10.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/listpc/listpc',
+                success :function(da){
+                    console.log(da)
+                }
+            })
+        }
+        //发表评论
+        btn4.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/listf/listf',
+                data:{
+                    passname:3,
+                    txt:'我又回来了',
+                    img:"123132"
+                },
+                success :function(da){
+                    if(da.num=="1"){
+                        alert("发表成功！");
+                    }else if(da.num=="0"){
+                        alert("发表失败！");
+                    }
+                }
+            })
+        }
+        //删除评论
+        btn5.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/lists/lists',
+                data:{
+                    id:2
+                },
+                success :function(da){
+                    if(da.num=="1"){
+                        alert("删除成功！");
+                    }else if(da.num=="0"){
+                        alert("删除失败！");
+                    }
+                }
+            })
+        }
+        //评论发表的评论
+        btn6.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/listp/listp',
+                data:{
+                    listid:4,
+                    passname:32,
+                    txt:'我神神秘秘，神神秘秘、、、',
+                    img:""
+                },
+                success :function(da){
+                    console.log(da)
+                    if(da.num=="1"){
+                        alert("评论成功！");
+                    }else if(da.num=="0"){
+                        alert("评论失败！");
+                    }
+                }
+            })
+        }
+        //删除评论发表的评论
+        btn7.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/listps/listps',
+                data:{
+                    id:4
+                },
+                success :function(da){
+                    console.log(da)
+                    if(da.num=="1"){
+                        alert("注册成功！");
+                    }else if(da.num=="0"){
+                        alert("注册失败！");
+                    }
+                }
+            })
+        }
+        //点赞
+        btn8.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/list/list',
+                success :function(da){
+                    console.log(da)
+                    if(da.num=="1"){
+                        alert("注册成功！");
+                    }else if(da.num=="0"){
+                        alert("注册失败！");
+                    }
+                }
+            })
+        }
+        //
+        btn9.onclick=function(){
+            $.ajax({
+                type:'get',
+                url:str+'/list/list',
+                success :function(da){
+                    console.log(da)
+                    if(da.num=="1"){
+                        alert("注册成功！");
+                    }else if(da.num=="0"){
+                        alert("注册失败！");
+                    }
+                }
+            })
+        }
+        //图片上传
+        var files;
+        var fil = '';
+        var setFiles=function(element){
+      	fil = element.files[0].name
+      	/*console.log(element.files[0])
+        $('#img').html('<img src="'+$('#pickfiles').val()+'">')
+		console.log(element.value)  //获取到选取的图片*/
         files=element.files[0];
         var fd = new FormData();
         fd.append("uploadedFile", files);
@@ -67,7 +230,7 @@
                 console.log("上传图片错了！");
             }
         })
-    };*/
+    };
 	</script>
 </body>
 </html>

@@ -11,6 +11,12 @@ var denglu = require('./routes/denglu');
 var zhuce = require('./routes/zhuce');
 var chaxun = require('./routes/chaxun');
 var imgsc = require('./routes/imgsc');
+var list = require('./routes/list');
+var listp = require('./routes/listp');
+var listf = require('./routes/listf');
+var lists = require('./routes/lists');
+var listps = require('./routes/listps');
+var listpc = require('./routes/listpc');
 
 var app = express();
 
@@ -32,6 +38,12 @@ app.use('/denglu', denglu);
 app.use('/zhuce', zhuce);
 app.use('/chaxun', chaxun);
 app.use('/imgsc', imgsc);
+app.use('/list', list);
+app.use('/listp', listp);
+app.use('/listf', listf);
+app.use('/lists', lists);
+app.use('/listps', listps);
+app.use('/listpc', listpc);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

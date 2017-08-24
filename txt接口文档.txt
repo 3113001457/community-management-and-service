@@ -5,7 +5,7 @@ passname:账号,
 password:密码
 返回：num:0；（用户名或密码有误）num:1;（登陆成功）
 
-注册接口：http://localhost:8000/zhuce/zhuce
+注册接口：http://192.168.43.153:8000/zhuce/zhuce
 passname:账号,
 password:密码，
 zt:状态，（Boss:0;物业:1;业主:2;成员3）必须是字符串
@@ -14,15 +14,53 @@ xiaoqu:那个小区（0：Boss;1：小区一；2：小区二、、、、）；必须是字符串
 返回：num:0;num:1;（）
 
 
-判断是否有此账户：http://localhost:8000/chaxun/chaxun
+判断是否有此账户：http://192.168.43.153:8000/chaxun/chaxun
 返回：num:0；（已注册）num:1;（可注册）
 
-
-列表页：
-id、用户账号、发表内容、发表时间、点赞+、点赞-
-评论页：
-id	listid	用户id	text	时间
-
-图片上传：http://localhost:8000/imgsc/imgsc	post
+图片上传：http://192.168.43.153:8000/imgsc/imgsc	post
 返回值：上传后的图片命名；
+
+获取评论列表页的全部数据：http://192.168.43.153:8000/list/list
+
+发表评论的接口：http://192.168.43.153:8000/listf/listf
+{
+	passname:该用户的账号
+	txt:发表的内容；
+	img:图片路径；（图片上传后返回的路径）
+}
+
+删除评论的接口：http://192.168.43.153:8000/lists/lists
+{
+	id:该评论的id
+}
+num：1；成功
+num：0；失败
+
+
+对评论页评论的接口：http://192.168.43.153:8000/listp/listp
+{
+	passname:该用户的账号
+	txt:发表的内容；
+	img:图片路径；（图片上传后返回的路径）
+}
+num：1；成功
+num：0；失败
+
+删除评论页评论的接口：http://192.168.43.153:8000/listps/listps
+{
+	id:该评论的评论的id
+}
+num：1；成功
+num：0；失败
+
+
+
+
+
+
+
+
+
+
+
 
