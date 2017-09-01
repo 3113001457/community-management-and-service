@@ -20,10 +20,10 @@ router.all('*', function(req, res, next) {
     next();
 });
 /**/
-
-function getUserByName(sql,arr,callback){
+function getUserByName(zt,zc,xiaoqu,callback){
     pool.getConnection(function(err,connection){
-        connection.query(sql,arr,function(err,result){
+        var sql = 'insert into login (zt,zc,xiaoqu) values (?,?,?)';
+        connection.query(sql,[zt,zc,xiaoqu],function(err,result){
             if(err){
                 console.log("ERRor:"+err.message);
                 return;
@@ -34,21 +34,16 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/zhuce', function(req, res) {
-    var namess=req.query["namesss"];
-    var tal=req.query["tals"];
+router.get('/wyzhuce', function(req, res) {
+    var zt='1';
+    var zc=req.query["zc"];
     var xiaoqu=req.query["xiaoqu"];
-    var address=req.query["address"];
-    var zc=req.query["zcss"];
-    var zt=req.query["zts"];
-    var sql = 'insert into login (zt,zc,xiaoqu,name,tal,address) values (?,?,?,?,?,?)';
-    getUserByName(sql,[zt,zc,xiaoqu,namess,tal,address],function (a,b) {
-        res.send(b)
-        /*if(b!=""){
+    getUserByName(zt,zc,xiaoqu,function (a,b) {
+        if(b!=""){
             res.send({num:'1'});
         }else if(b==""){
             res.send({num:'0'});
-        }*/
+        }
     });
 });
 

@@ -6,6 +6,20 @@
 	<style type="text/css"></style>
 </head>
 <body>
+<div>
+    <input type="text" id="zc" placeholder="验证码"/>
+    <select id="xioqu">
+        <option value="1">一号小区</option>
+        <option value="2">二号小区</option>
+        <option value="3">三号小区</option>
+    </select>
+    <button id="h_btn">物业点击生成验证码</button>
+</div>
+
+<div>
+    <input type="text" id="yzc" placeholder="验证码"/>
+    <button id="h_btn">业主点击生成验证码</button>
+</div>
 
 <button id="btn">账号登录btn</button><br />
 <button id="btn1">账号注册btn1</button><br />
@@ -19,18 +33,27 @@
 <button id="btn8">点赞btn8</button><br />
 <button id="btn9">btn9</button><br />
 <input type="file" id="pickfiles" name="importFile" onchange="setFiles(this)" value="图片上传" /><br />
+
+
+<div><button id="bttn">业主注册</button></div>
+321
+<div><button id="btnbtn">业主账号密码修改</button></div>
+
+
+<div><button id="bttnn">物业添加住户</button></div>
+<div><button id="btntn">发布维修</button></div>
 <!-- <input type="button" id="uploadfiles" value="注册" /> -->
     <script src="javascripts/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript">
-		var str='http://192.168.43.153:8000';
+		var str='http://localhost:8000';
         //账号登录
         btn.onclick=function(){
             $.ajax({
                 type:'get',
                 url:str+'/denglu/denglu',
                 data:{
-                    passname:3,
-                    password:3
+                    passname:1,
+                    password:1
                 },
                 success :function(da){
                     if(da.num=="0"){
@@ -224,6 +247,7 @@
             processData: false,
             success:function(data){
                 console.log(data);
+                document.write(data)
                 //console.log(fd)
             },
             error:function(){
@@ -231,6 +255,151 @@
             }
         })
     };
-	</script>
+	</script
+    <script type="text/javascript">
+    h_btn.onclick=function(){
+        $.ajax({
+            type:'get',
+            url:str+'/wyzhuce/wyzhuce',
+            data:{
+                zc:zc.value,
+                xiaoqu:xioqu.value
+            },
+            success :function(da){
+                if(da.num=="1"){
+                    alert("注册成功！");
+                }else if(da.num=="0"){
+                    alert("注册失败！");
+                }
+            }
+        })
+    }
+    </script>
+    <script type"text/javascript">
+
+    /*业主注册*/
+    var names=132;
+    var words=123;
+    var zcs=123123;
+    bttn.onclick=function(){
+        $.ajax({
+            type:'get',
+            url:str+'/chaxun/chaxun',//账号查询
+            data:{
+                passname:names//页面中获取账号
+            },
+            success :function(d){
+                if(d.num=="1"){
+                    console.log("可注册！");
+                    $.ajax({
+                        get:"get",
+                        url:str+"/yzcx/yzcx",//注册的验证码查询
+                        data:{
+                            zc:zcs//注册码（和物业要的验证码！）
+                        },
+                        success :function(da){
+                            console.log()
+                            if(da.length==0){
+                                console.log('验证码错误！');//获取不到邀请码时。
+                            }else{  
+                                /**/
+                                $.ajax({
+                                    get:"get",
+                                    url:str+"/xiugai/xiugai",//修改密码
+                                    data:{
+                                        passname:names,//页面中获取的注册账号
+                                        password:words,//页面中获取的注册密码
+                                        zc:zcs//验证码查询得来的验证码（也可以从页面中获取，因为if判断已经判断了这里的验证是正确的！）
+                                    },
+                                    success :function(data){
+                                        if(data.num==1){
+                                            console.log("注册成功！");
+                                        }else if(data.num==0){
+                                            console.log("注册失败！")
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }else if(d.num=="0"){
+                    alert("已注册！");
+                }
+            }
+        })
+    }
+    /*业主密码修改*/
+    var newwor=123132;//新的密码
+    var passnam=132;//从本地获取账号
+    //从本地获取当前密码，并判断输入框中的密码是否一致，如果一致，则执行ajax；
+    btnbtn.onclick=function(){
+        $.ajax({
+            type:'get',
+            url:str+'/yzxg/yzxg',
+            data:{
+                passname:passnam,
+                newpassword:newwor
+            },
+            success:function(da){
+                console.log(da.num)
+                if(da.num==0){
+                    alert("修改密码失败！")
+                }else if(da.num==1){
+                    alert("修改密码成功！")
+                }
+            }
+        })
+    }
+
+
+    /*物业添加业主*/
+    var namesss='侯宇杰';
+    var tals='15011436690';
+    var xiaoqu='2';//这个可以从本地缓冲中获取当前物业的小区情况，1代表一号小区以此类推。
+    var address='10号楼3单元702';
+    var zcss='123456132';
+    var zts=2;
+    bttnn.onclick=function(){
+        $.ajax({
+            type:'get',
+            url:str+'/zhuce/zhuce',
+            data:{
+                namesss:namesss,
+                tals:tals,
+                xiaoqu:xiaoqu,
+                address:address,
+                zcss:zcss,
+                zts:zts
+            },
+            success:function(da){
+                console.log(da)
+            }
+        })
+    }
+    /*业主发布维修通知*/
+    var haha='123321';//从本地储存中获取
+    var hahaname='侯宇杰';//从本地储存中获取
+    var imgsrc="123132";
+    var hahatxt="我们家漏水了！";
+    var hahaaddress="10号楼3单元702";//可以从本地储存中获取；也可手动输入
+    var hahatel="15011436690";//可以从本地储存中获取，也可手动输入手机号
+    btntn.onclick=function(){
+        $.ajax({
+            type:'get',
+            url:str+'/fbwx/fbwx',//发布维修
+            data:{
+                passname:haha,
+                name:hahaname,
+                img:imgsrc,
+                txt:hahatxt,
+                address:hahaaddress,
+                tel:hahatel
+            },
+            success:function(da){
+                console.log(da)
+            }
+        })
+    }
+    </script>
 </body>
 </html>

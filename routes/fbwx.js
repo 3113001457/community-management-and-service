@@ -34,15 +34,15 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/zhuce', function(req, res) {
-    var namess=req.query["namesss"];
-    var tal=req.query["tals"];
-    var xiaoqu=req.query["xiaoqu"];
+router.get('/fbwx', function(req, res) {
+    var passname=req.query["passname"];
+    var name=req.query["name"];
+    var img=req.query["img"];
+    var txt=req.query["txt"];
     var address=req.query["address"];
-    var zc=req.query["zcss"];
-    var zt=req.query["zts"];
-    var sql = 'insert into login (zt,zc,xiaoqu,name,tal,address) values (?,?,?,?,?,?)';
-    getUserByName(sql,[zt,zc,xiaoqu,namess,tal,address],function (a,b) {
+    var tel=req.query["tel"];
+    var sql = 'insert into weixiu (passname,name,img,txt,address,tel) values (?,?,?,?,?,?)';
+    getUserByName(sql,[passname,name,img,txt,address,tel],function (a,b) {
         res.send(b)
         /*if(b!=""){
             res.send({num:'1'});

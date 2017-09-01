@@ -18,6 +18,16 @@ var lists = require('./routes/lists');
 var listps = require('./routes/listps');
 var listpc = require('./routes/listpc');
 
+var xiugai = require('./routes/xgmm');
+
+/*物业*/
+var wyzhuce = require('./routes/wyzhuce');
+var yzcx = require('./routes/yzcx');
+
+/*业主修改密码*/
+var yzxg = require('./routes/yzxg');
+var fbwx = require('./routes/fbwx');
+
 var app = express();
 
 // view engine setup
@@ -44,6 +54,15 @@ app.use('/listf', listf);
 app.use('/lists', lists);
 app.use('/listps', listps);
 app.use('/listpc', listpc);
+
+app.use('/xiugai', xiugai);
+app.use('/yzcx', yzcx);
+app.use('/yzxg', yzxg);
+
+app.use('/fbwx', fbwx);
+
+/*物业*/
+app.use('/wyzhuce', wyzhuce);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

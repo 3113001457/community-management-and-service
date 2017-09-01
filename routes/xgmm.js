@@ -20,10 +20,10 @@ router.all('*', function(req, res, next) {
     next();
 });
 /**/
-
-function getUserByName(sql,arr,callback){
+function getUserByName(passname,password,zc,callback){
     pool.getConnection(function(err,connection){
-        connection.query(sql,arr,function(err,result){
+        var sql = 'update login set passname=? , password=? where zc=?';
+        connection.query(sql,[passname,password,zc],function(err,result){
             if(err){
                 console.log("ERRor:"+err.message);
                 return;
@@ -34,21 +34,16 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/zhuce', function(req, res) {
-    var namess=req.query["namesss"];
-    var tal=req.query["tals"];
-    var xiaoqu=req.query["xiaoqu"];
-    var address=req.query["address"];
-    var zc=req.query["zcss"];
-    var zt=req.query["zts"];
-    var sql = 'insert into login (zt,zc,xiaoqu,name,tal,address) values (?,?,?,?,?,?)';
-    getUserByName(sql,[zt,zc,xiaoqu,namess,tal,address],function (a,b) {
-        res.send(b)
-        /*if(b!=""){
+router.get('/xiugai', function(req, res) {
+    var passname=req.query["passname"];
+    var password=req.query["password"];
+    var zc=req.query["zc"];
+    getUserByName(passname,password,zc,function (a,b) {
+        if(b!=""){
             res.send({num:'1'});
         }else if(b==""){
             res.send({num:'0'});
-        }*/
+        }
     });
 });
 

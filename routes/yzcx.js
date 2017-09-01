@@ -15,12 +15,11 @@ router.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", '3.2.1');
+    res.header("X-Powered-By", ' 3.2.1');
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
 /**/
-
 function getUserByName(sql,arr,callback){
     pool.getConnection(function(err,connection){
         connection.query(sql,arr,function(err,result){
@@ -34,21 +33,11 @@ function getUserByName(sql,arr,callback){
     })
 }
 /* GET users listing. */
-router.get('/zhuce', function(req, res) {
-    var namess=req.query["namesss"];
-    var tal=req.query["tals"];
-    var xiaoqu=req.query["xiaoqu"];
-    var address=req.query["address"];
-    var zc=req.query["zcss"];
-    var zt=req.query["zts"];
-    var sql = 'insert into login (zt,zc,xiaoqu,name,tal,address) values (?,?,?,?,?,?)';
-    getUserByName(sql,[zt,zc,xiaoqu,namess,tal,address],function (a,b) {
-        res.send(b)
-        /*if(b!=""){
-            res.send({num:'1'});
-        }else if(b==""){
-            res.send({num:'0'});
-        }*/
+router.get('/yzcx', function(req, res) {
+    var zc=req.query["zc"];
+    var sql = 'select * from login where zc=?';
+    getUserByName(sql,[zc],function (a,b) {
+        res.send(b);
     });
 });
 
